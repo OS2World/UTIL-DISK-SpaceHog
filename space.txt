@@ -1,0 +1,50 @@
+
+Syntax: E:\BIN\space.exe [DriveLetter[:]]
+
+The current drive will be used if no DriveLetter is given.
+The trailing colon is also optional.
+
+This PUBLIC DOMAIN program helps you maintain the amount
+of free space in the specified drive to under 2G-512 Bytes.
+(Because HPFS allocates space in 512 byte units.)
+Thus stopping programs using 32-bit signed integer math
+from seeing space above 2G-512 bytes as negative.
+
+If it can't find the \SPACEHOG directory in the specified
+partition, it behaves like a run-of-the-mill freespace
+reporting utility, albeit it can handle disk partitions up
+to 999,999,999,999 bytes in size. (see Split000()) It
+reports the file system type and in the case of LAN drive,
+the NETBIOS alias name.
+
+If it sees the \SPACEHOG directory, which you have to
+create explicitly, it will create dummy files there as
+needed to maintain the 2G-512 byte freespace ceiling for
+that disk partition (you may have to run this twice). The
+dummy files are named with simple integers, from 0 thru
+99999999...
+
+If the amount of reserved space needed is less than 2G-512
+bytes, it will shrink or expand the size of the \SPACEHOG\0
+file instead.
+
+Warning: You use this program and its source code at your
+         own risk. I provide no warranty of any kind. But
+         I *do* welcome bug FIXES/reports via email to:
+
+         wfyuen@bestweb.net
+
+Patches: If you don't have any of the four compilers I used,
+         you can change the \SPACEHOG directory to some place
+         else by patching the 256 byte variable I reserved
+         with a binary editor. Search for this string:
+
+         "?:\spacehog"
+
+         The '?' will be replaced by the program with the
+         drive letter passed from the command line. Therefore,
+         you need not patch that. Please make sure you end the
+         new directory name with a binary 0 byte. It must not
+         end with a backslash ('\')!!!
+
+Wing Yuen                                      Jun 19 2000
